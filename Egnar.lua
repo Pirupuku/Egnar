@@ -152,12 +152,12 @@ function Egnar_OnUpdate()
 			end
 		end
 	end
-	
+
 	if cl == "HUNTER" then
 		for l = 1, 120 do
 			texture = GetActionTexture(l)
 			if not GetActionText(l) and texture ~= nil then
-				if (texture == path.."Ability_Rogue_Trip" or texture == path.."Ability_Hunter_SwiftStrike") then
+				if (texture == path.."Ability_Rogue_Trip" or texture == path.."Ability_Hunter_SwiftStrike" or texture == path.."Ability_Rogue_Feint") then
 					if IsActionInRange(l) == 1 then
 						FontString1:SetText("Melee")
 						SetColor(unpack({0, 1, 0, 0.7}))
@@ -165,22 +165,32 @@ function Egnar_OnUpdate()
 					else
 						hunterHelper = 0
 					end
-				elseif (texture == path.."INV_Weapon_Crossbow_06" or texture == path.."Ability_ImpalingBolt" or texture == path.."INV_Spear_07" or texture == path.."Ability_UpgradeMoonGlaive") and hunterHelper == 0 then
-						if IsActionInRange(l) == 1 then
-							if CheckInteractDistance("target", 4) then
-								FontString1:SetText("In Range")
-								SetColor(unpack({0, 0.5, 1, 0.7}))
-							else
-								FontString1:SetText("Long Range")
-								SetColor(unpack({0, 0, 1, 0.7}))
-							end
-						elseif CheckInteractDistance("target", 4) then
-							FontString1:SetText("Dead Zone")
-							SetColor(unpack({1, 0.5, 0, 0.7}))
+				elseif (texture == path.."Ability_Throw" and hunterHelper == 0) then
+					if IsActionInRange(l) == 1 then
+						if CheckInteractDistance("target", 4) then
+							FontString1:SetText("In Range")
+							SetColor(unpack({0, 0.5, 1, 0.7}))
 						else
-							FontString1:SetText("Out of Range")
-							SetColor(unpack({1, 0, 0, 0.7}))
+							FontString1:SetText("Long Range")
+							SetColor(unpack({0.5, 0, 1, 0.7}))
 						end
+					end
+				elseif (texture == path.."INV_Weapon_Crossbow_06" or texture == path.."Ability_ImpalingBolt" or texture == path.."INV_Spear_07" or texture == path.."Ability_UpgradeMoonGlaive" or texture == path.."Spell_Frost_Stun" or texture == path.."Spell_Arcane_Blink") and hunterHelper == 0 then
+					if IsActionInRange(l) == 1 then
+						if CheckInteractDistance("target", 4) then
+							FontString1:SetText("In Range")
+							SetColor(unpack({0, 0.5, 1, 0.7}))
+						else
+							FontString1:SetText("Extra Long Range")
+							SetColor(unpack({0, 0, 1, 0.7}))
+						end
+					elseif CheckInteractDistance("target", 4) then
+						FontString1:SetText("Dead Zone")
+						SetColor(unpack({1, 0.5, 0, 0.7}))
+					else
+						FontString1:SetText("Out of Range")
+						SetColor(unpack({1, 0, 0, 0.7}))
+					end
 				end
 			end
 		end
