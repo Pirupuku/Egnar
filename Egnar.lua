@@ -15,6 +15,7 @@ local shamanHelper2
 local paladinHelper
 local priestHelper
 local hunterHelper
+local hunterHelper2
 local druidHelper
 
 function Egnar_OnLoad()
@@ -165,25 +166,26 @@ function Egnar_OnUpdate()
 					else
 						hunterHelper = 0
 					end
+				elseif (texture == path.."Ability_GolemStormBolt" and hunterHelper == 0) then
+					if (IsActionInRange(l) == 1 and hunterHelper2 == 0) then
+						FontString1:SetText("Dead Zone")
+						SetColor(unpack({1, 0.5, 0, 0.7}))
+					elseif (IsActionInRange(l) == 1) then
+						FontString1:SetText("In Range")
+						SetColor(unpack({0, 0.5, 1, 0.7}))
+					end
 				elseif (texture == path.."Ability_Throw" and hunterHelper == 0) then
-					if IsActionInRange(l) == 1 then
-						if CheckInteractDistance("target", 4) then
-							FontString1:SetText("In Range")
-							SetColor(unpack({0, 0.5, 1, 0.7}))
-						else
-							FontString1:SetText("Long Range")
-							SetColor(unpack({0.5, 0, 1, 0.7}))
-						end
+					if (IsActionInRange(l) == 1) then
+						FontString1:SetText("Long Range")
+						SetColor(unpack({0.5, 0, 1, 0.7}))
+						hunterHelper2 = 1
+					else
+						hunterHelper2 = 0
 					end
 				elseif (texture == path.."INV_Weapon_Crossbow_06" or texture == path.."Ability_ImpalingBolt" or texture == path.."INV_Spear_07" or texture == path.."Ability_UpgradeMoonGlaive" or texture == path.."Spell_Frost_Stun" or texture == path.."Spell_Arcane_Blink") and hunterHelper == 0 then
 					if IsActionInRange(l) == 1 then
-						if CheckInteractDistance("target", 4) then
-							FontString1:SetText("In Range")
-							SetColor(unpack({0, 0.5, 1, 0.7}))
-						else
-							FontString1:SetText("Extra Long Range")
-							SetColor(unpack({0, 0, 1, 0.7}))
-						end
+						FontString1:SetText("Extra Long Range")
+						SetColor(unpack({0, 0, 1, 0.7}))
 					elseif CheckInteractDistance("target", 4) then
 						FontString1:SetText("Dead Zone")
 						SetColor(unpack({1, 0.5, 0, 0.7}))
@@ -194,7 +196,6 @@ function Egnar_OnUpdate()
 				end
 			end
 		end
-
 	end
 	
 	if cl == "WARLOCK" then
