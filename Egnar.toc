@@ -1,6 +1,6 @@
 ## Interface: 11200
 ## Title: Egnar
-## Notes: Show a range indicator for all classes. (Modified by Dieken, all credits to the creator Erodjan)
+## Notes: Shows a range indicator for all classes. (Modified by Dieken, all credits to the creator Erodjan)
 ## Author: Erodjan, Dieken
 ## Version: 0.2
 
